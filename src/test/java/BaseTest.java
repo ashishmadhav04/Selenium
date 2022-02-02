@@ -3,14 +3,20 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentReporter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
@@ -45,35 +51,6 @@ public class BaseTest extends StoreResultsToDB{
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Test
-    public void Test1()
-    {
-        driver.get("https://localhost:5001/swagger/index.html");
-        String title = driver.getTitle();
-        System.out.println("Title of the page is: " + title);
-        Assert.assertEquals(title, "Swagger UI");
-    }
-
-    @Test
-    public void Test2()
-    {
-        driver.get("https://www.google.com");
-        String title = driver.getTitle();
-        System.out.println("Title of the page is: " + title);
-        Assert.assertEquals(title, "Google");
-    }
-
-    @Test
-    public void Test3() throws IOException {
-        driver.get("https://www.google.com");
-        String title = driver.getTitle();
-
-        System.out.println("Title of the page is: " + title);
-        Assert.assertEquals(title, "Google");
-        //ReadingPropertyFile.WritingPropertiesFile();
-    }
-
-
     @AfterMethod
     public void AfterMethod(ITestResult result) throws Exception {
         System.out.println("After Method: This is executed after every testcase. Quitting the browser");
@@ -90,7 +67,7 @@ public class BaseTest extends StoreResultsToDB{
             case 3: test.skip("Test Skipped");
                 break;
         }
-
+        
         driver.close();
         driver.quit();
         extent.flush();

@@ -36,4 +36,12 @@ public class googleSearchSteps
     public void i_am_able_to_close_the_browser() {
         driver.close();
     }
+
+    @Then("It takes me to the next page and i verify the title and wait")
+    public void it_takes_me_to_the_next_page_and_i_verify_the_title_and_wait() throws InterruptedException {
+        Assert.assertEquals(driver.getTitle(), "Gmail");
+        driver.navigate().back();
+        Thread.sleep(10000);
+    }
+
 }
