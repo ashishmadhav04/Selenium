@@ -1,3 +1,6 @@
+package Pages;
+
+import Utilities.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,19 +15,19 @@ public class GooglePage extends BaseTest
     }
 
     @FindBy(xpath = "//input[@title='Search']")
-    WebElement Searchbox;
+    public WebElement Searchbox;
 
     @FindBy(xpath = "//input[@aria-label='Google Search']")
-    WebElement GoogleSearchButton;
+    public WebElement GoogleSearchButton;
 
     @FindBy(xpath = "//input[contains(@aria-label, 'Feeling Lucky')]")
-    WebElement IAmFeelingLuckyButton;
+    public WebElement IAmFeelingLuckyButton;
 
     @FindBy(xpath = "//*[contains(text(), 'Gmail')]")
-    WebElement GmailLink;
+    public WebElement GmailLink;
 
     @FindBy(xpath = "//div[@class='OBMEnb']/ul/li")
-    WebElement SearchDropdown;
+    public WebElement SearchDropdown;
 
     public void launchPage ()
     {

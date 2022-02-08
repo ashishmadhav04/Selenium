@@ -5,6 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "/Users/ashishmadhav/Documents/MyGitProjects/Basic_Selenium/Basic_Selenium-Framework/Features/GoogleSearch.feature", glue = "stepDefinition")
+@CucumberOptions(features = "./Features/GoogleSearch.feature",
+        glue = "stepDefinition",
+        plugin = {"pretty", "html:Reports"})
 public class TestRunner {
 }

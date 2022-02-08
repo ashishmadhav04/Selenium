@@ -1,6 +1,9 @@
+package Tests;
+
+import Utilities.BaseTest;
+import Utilities.Common_Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -10,9 +13,9 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class ExampleTests extends BaseTest{
+public class ExampleTests extends BaseTest {
+    Common_Utility common = new Common_Utility();
     @Test
     public void Simple_Test()
     {
@@ -38,8 +41,8 @@ public class ExampleTests extends BaseTest{
         String title = driver.getTitle();
 
         System.out.println("Title of the page is: " + title);
-        Assert.assertEquals(title, "Google");
-        //ReadingPropertyFile.WritingPropertiesFile();
+        Assert.assertEquals(title, "GoOogle");
+        //Utilities.ReadingPropertyFile.WritingPropertiesFile();
     }
 
     @Test
@@ -64,8 +67,10 @@ public class ExampleTests extends BaseTest{
         driver.get("https://www.google.com");
         String title = driver.getTitle();
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(By.xpath("//img[@title= 'Lunar New Year 2022']"))).build().perform();
+        WebElement gApp = driver.findElement(By.xpath("//a[@class='gb_A']"));
+        action.moveToElement(gApp).build().perform();
         Thread.sleep(10000);
+        System.out.println(gApp.getAttribute("ariaLabel"));
         driver.findElement(By.xpath("//a[contains(@href, 'https://mail.google.com/mail/&ogbl')]")).click();
         driver.findElement(By.xpath("//a/span[@class='laptop-desktop-only']")).click();
         System.out.println("Title of the page is: " + title);

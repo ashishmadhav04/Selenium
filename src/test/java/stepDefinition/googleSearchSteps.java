@@ -1,8 +1,7 @@
 package stepDefinition;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import Pages.GooglePage;
+import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,19 +9,19 @@ import org.testng.Assert;
 
 public class googleSearchSteps
 {
-    WebDriver driver;
+    GooglePage gPage;
+    WebDriver driver = new ChromeDriver();
 
     @Given("Navigate to gmail page")
     public void navigate_to_gmail_page() {
         System.setProperty("webdriver.chrome.driver", "/Users/ashishmadhav/Downloads/chromedriver");
-        driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.get("https://www.gmail.com");
     }
 
-    @When("I type keywoard ashish in the search box and then hit Forgot email link")
-    public void i_type_keywoard_ashish_in_the_search_box_and_then_hit_forgot_email_link() {
+    @When("I type keyword ashish in the search box and then hit Forgot email link")
+    public void i_type_keyword_ashish_in_the_search_box_and_then_hit_forgot_email_link() {
         driver.findElement(By.xpath("//div/input[@name='identifier']")).sendKeys("ashish");
         driver.findElement(By.xpath("//div/button[contains(text(),'Forgot email')]")).click();
     }
@@ -42,6 +41,25 @@ public class googleSearchSteps
         Assert.assertEquals(driver.getTitle(), "Gmail");
         driver.navigate().back();
         Thread.sleep(10000);
+    }
+
+    @Given("Navigate to google page")
+    public void navigate_to_google_page() {
+        System.setProperty("webdriver.chrome.driver", "/Users/ashishmadhav/Downloads/chromedriver");
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        gPage = new GooglePage(driver);
+        gPage.launchPage();
+        //driver.get("https://www.google.com");
+    }
+    @When("Type keyword {string} in the search box")
+    public void type_keyword_in_the_search_box(String sString) {
+        gPage.Searchbox.sendKeys(sString);
+        //driver.findElement(By.xpath("//input[@title='Search']")).sendKeys(sString);
+    }
+    @Then("Wait for {long} milliseconds")
+    public void wait_for_milliseconds(Long iMSeconds) throws InterruptedException {
+        Thread.sleep(iMSeconds);
     }
 
 }
